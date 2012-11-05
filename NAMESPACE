@@ -1,0 +1,5 @@
+export(ordLORgee,nomLORgee,matrixLOR,intrinsic.pars,ipfp.control,LORgee.control)
+S3method(print,LORgee)
+S3method(summary,LORgee)
+S3method(print,summary.LORgee)
+
