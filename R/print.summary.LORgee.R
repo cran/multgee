@@ -1,0 +1,28 @@
+print.summary.LORgee <-
+function (x, ...) 
+{
+    cat(x$title, "\n")
+    cat(x$version, "\n")
+    cat("\nLink :", x$link, "\n")
+    cat("\nLocal Odds Ratios:")
+    cat("\nStructure:        ", x$odds.ratio$structure)
+    if (!is.null(x$odds.ratio$model)) 
+        cat("\nModel:            ", x$odds.ratio$model)
+    if (!is.null(x$odds.ratio$homogeneous)) 
+        cat("\nHomogenous scores:", x$odds.ratio$homogeneous)
+    if (!is.null(x$odds.ratio$restricted)) 
+        cat("\nRestricted scores:", x$odds.ratio$restricted)
+    cat("\n")
+    cat("\ncall:\n")
+    print(x$call)
+    cat("\nSummary of residuals:\n")
+    print(summary(as.vector(x$residuals)))
+    cat("\nNumber of Iterations:", x$niter, "\n")
+    cat("\nCoefficients:\n")
+    printCoefmat(x$coefficients)
+    cat("\nLocal Odds Ratio:\n")
+    print(round(x$odds.ratio$theta, 3))
+    if (!is.null(x$pvalue)) 
+        cat("\npvalue of Null model:", round(x$pvalue, 4), "\n")
+}
+
