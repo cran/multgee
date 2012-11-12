@@ -33,7 +33,7 @@ Anestis Touloumis
 data(arthritis)
 fitmod <- ordLORgee(y~factor(trt)+factor(baseline)+factor(time), id = "id", 
                     repeated = "time", data = arthritis)
-\dontrun{A one-step GEE estimator}
+## A one-step GEE estimator
 fitmod1 <- update(fitmod, control = LORgee.control(maxiter=1))
 coef(fitmod)
 coef(fitmod1)

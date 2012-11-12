@@ -5,6 +5,7 @@ function (formula = formula, data = data, id = id, repeated = repeated,
     restricted = FALSE, control = LORgee.control(), 
     ipfp.ctrl = ipfp.control(), IM = "solve") 
 {
+    options(contrasts=c("contr.treatment", "contr.poly"))
     LORstrs <- c("independence", "uniform", "category.exch", 
         "time.exch", "RC","fixed")
     icheck <- as.integer(match(LORstr, LORstrs, -1))
@@ -160,9 +161,9 @@ function (formula = formula, data = data, id = id, repeated = repeated,
     LORstr = LORstr, add)
     fit <- list()
     fit$title <- "GEE FOR ORDINAL MULTINOMIAL RESPONSES"
-    fit$version <- "version 1.0 modified 04-11-2012"
+    fit$version <- "version 1.1 modified 10-11-2012"
     fit$link <- if (link == "acl") 
-        paste("Adjacent-category logit")
+        paste("Adjacent Category Logit")
     else paste("Cumulative", link, sep = " ")
     fit$odds.ratio <- list()
     fit$odds.ratio$structure <- LORstr

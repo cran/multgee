@@ -45,7 +45,7 @@ Touloumis, A., Agresti, A. and Kateri, M. (2012). GEE for multinomial responses 
 \examples{
 data(arthritis)
 data <- arthritis
-fitord <- ordLORgee(y~factor(trt)+factor(time)+factor(baseline),
+fitord <- ordLORgee(y~factor(time)+factor(trt)+factor(baseline),
           id="id",repeated="time",data=data)
 summary(fitord) 
 

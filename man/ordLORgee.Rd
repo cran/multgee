@@ -85,7 +85,35 @@ The \code{LORterm} argument must be an \eqn{L} x \eqn{I^2} matrix, where \eqn{L}
 
 }
 \value{
-Returns an object of the class "\code{LORgee}". Generic \link{summary}, \link{print}, \link{fitted} and \link{residuals} methods are available. The \code{pvalue of the Null model} corresponds to the hypothesis \eqn{H_0: \beta=0} based on the Wald test statistic.
+Returns an object of the class "\code{LORgee}". This has components:
+\item{title}{title for the GEE model.}
+\item{version}{the current version of the GEE solver.}
+\item{link}{the marginal link function.}
+\item{odds.ratio}{the `working' local odds ratios structure name along with the estimates.}
+\item{terms}{the \code{terms} structure describing the model.}
+\item{contrasts}{the \code{contrasts} used for the factors.}
+\item{nobs}{the number of observations after recoding the response variables into equivalent binary responses.}
+\item{convergence}{the values of convergence variables.}
+\item{coefficients}{the estimated regression parameter vector of the marginal model.}
+\item{linear.pred}{the estimated linear predictor of the marginal regression model with \code{j}-th column corresponding to the \code{j}-th response category.}
+\item{fitted.values}{the estimated fitted values of the marginal regression model with \code{j}-th column corresponding to the \code{j}-th response category.}
+\item{residuals}{the residuals of the marginal regression model based on the binary responses. The \code{j}-th column corresponds to the \code{j}-th response category.}
+\item{y}{the multinomial response variables.}
+\item{id}{the \code{id} variable based on the binary responses.}
+\item{max.id}{the number of patients.}
+\item{clusz}{the number of observations within each patient.}
+\item{robust.variance}{the estimated "robust" covariance matrix.}
+\item{naive.variance}{the estimated "naive" or model-based covariance matrix.}
+\item{xnames}{the regression coefficients' symbolic names.}
+\item{categories}{the number of observed response categories.}
+\item{occasions}{the levels of the \code{repeated} variable.}
+\item{gee.control}{the control values for the GEE solver.}
+\item{ipfp.control}{the control values for the \code{ipfp} function.}
+\item{inverse.method}{the method used for inverting matrices.}
+\item{adding.constant}{the value used for \code{add}.}
+\item{call}{the matched call.}
+\item{pvalue}{the p-value based on a Wald test that no covariates are statistically significant.}
+Generic \link{coef}, \link{summary}, \link{print}, \link{fitted} and \link{residuals} methods are available. The \code{pvalue of the Null model} corresponds to the hypothesis \eqn{H_0: \beta_1=...=\beta_{I-1}=0} based on the Wald test statistic.  
 }
 \references{
 Touloumis, A., Agresti, A. and Kateri, M. (2012). GEE for multinomial responses using a local odds ratios parameterization. \emph{Submitted}.
@@ -99,8 +127,8 @@ For a nominal response scale use \link{nomLORgee}.
 \examples{
 data(arthritis)
 intrinsic.pars(arthritis$y,arthritis$id,arthritis$time,5)
-fitmod <- ordLORgee(y~factor(trt)+factor(baseline)+factor(time),id="id",
-                          repeated="time",data=arthritis, LORstr="uniform")
+fitmod <- ordLORgee(y~factor(time)+factor(trt)+factor(baseline),id="id",
+                        repeated="time",data=arthritis, LORstr="uniform")
 summary(fitmod)  
 }
 

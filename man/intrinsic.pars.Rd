@@ -46,11 +46,12 @@ Touloumis, A., Agresti, A. and Kateri, M. (2012). GEE for multinomial responses 
 \examples{
 data(arthritis)
 intrinsic.pars(arthritis$y,arthritis$id,arthritis$time,5)
-\dontrun{The intrinsic parameters do not differ much. The 'uniform' local odds ratios
-structure might be a good approximation for the association pattern.}
+## The intrinsic parameters do not differ much. The 'uniform' local odds ratios
+## structure might be a good approximation for the association pattern.
+
 set.seed(1)
 data(housing)
 intrinsic.pars(housing$y,housing$id,housing$time,3,rscale="nominal")
-\dontrun{The intrinsic parameters seem to vary. The 'RC' local odds ratios structure
-might be a good approximation for the association pattern.}
+## The intrinsic parameters seem to vary. The 'RC' local odds ratios structure
+## might be a good approximation for the association pattern
 }
