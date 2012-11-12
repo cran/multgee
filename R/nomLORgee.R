@@ -4,6 +4,7 @@ function (formula = formula, data = data, id = id, repeated = repeated,
     LORterm = NULL, add = 0, homogeneous = TRUE, 
     control = LORgee.control(), ipfp.ctrl = ipfp.control(), IM = "solve") 
 {
+    options(contrasts=c("contr.treatment", "contr.poly"))
     restricted <- NULL
     LORstrs <- c("independence", "time.exch", "RC", "fixed")
     icheck <- as.integer(match(LORstr, LORstrs, -1))
@@ -139,8 +140,8 @@ function (formula = formula, data = data, id = id, repeated = repeated,
     LORstr = LORstr, add)
     fit <- list()
     fit$title <- "GEE FOR NOMINAL MULTINOMIAL RESPONSES"
-    fit$version <- "version 1.0 modified 04-11-2012"
-    fit$link <- c("Baseline-category Logit")
+    fit$version <- "version 1.1 modified 10-11-2012"
+    fit$link <- c("Baseline Category Logit")
     fit$odds.ratio <- list()
     fit$odds.ratio$structure <- LORstr
     fit$odds.ratio$model <- LORem

@@ -30,12 +30,14 @@ Anestis Touloumis
 \link{nomLORgee} and \link{ordLORgee}.
 }
 \examples{
-\dontrun{Illustrating the construction of a "fixed" local odds ratio structure 
-         using the arthritis dataset. Here, we assume a uniform local odds ratios 
-         structure equal to 2 for each time pair.}
-\dontrun{Create the uniform local odds ratios structure.}
+## Illustrating the construction of a "fixed" local odds ratio structure 
+## using the arthritis dataset. Here, we assume a uniform local odds ratios 
+## structure equal to 2 for each time pair.
+
+## Create the uniform local odds ratios structure.
 lorterm <- matrixLOR(matrix(2,4,4))
-\dontrun{Create the LORterm argument.}
+
+## Create the LORterm argument.
 lorterm <- c(lorterm)
 lorterm <- matrix(c(lorterm),3,25,TRUE)
 data(arthritis)

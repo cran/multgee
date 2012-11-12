@@ -3,6 +3,7 @@ function (Y, X_mat, coeffs, ncategories, id, repeated, offset,
     link, LORterm, marpars, ipfp.ctrl, control, IM, LORem = LORem, 
     LORstr = LORstr, add) 
 {
+    inversematrix <- function(x) inversemat(x,IM)
     tol <- control$tolerance
     maxiter <- control$maxiter
     verbose <- control$verbose
@@ -98,8 +99,8 @@ function (Y, X_mat, coeffs, ncategories, id, repeated, offset,
                 prob <- fitprob[id_ind]
                 mat1 <- diagmod(prob)
                 if (Ti == 1) {
-                  V_mat <- inversemat(mat1 - tcrossprod(prob, 
-                    prob), IM)
+                  V_mat <- inversematrix(mat1 - tcrossprod(prob, 
+                    prob))
                 }
                 else if (Ti == noccasions) {
                   proball <- fitproball[extid_vector[[i]]]
@@ -119,8 +120,8 @@ function (Y, X_mat, coeffs, ncategories, id, repeated, offset,
                   }
                   mat1[sel_mat[[noccasions - 1]]] <- aperm(mat1, 
                     c(2, 1))[sel_mat[[noccasions - 1]]]
-                  V_mat <- inversemat(mat1 - tcrossprod(prob, 
-                    prob), IM)
+                  V_mat <- inversematrix(mat1 - tcrossprod(prob, 
+                    prob))
                 }
                 else {
                   Tiid <- times_mat[[i]]
@@ -141,8 +142,8 @@ function (Y, X_mat, coeffs, ncategories, id, repeated, offset,
                   }
                   mat1[sel_mat[[Ti - 1]]] <- aperm(mat1, c(2, 
                     1))[sel_mat[[Ti - 1]]]
-                  V_mat <- inversemat(mat1 - tcrossprod(prob, 
-                    prob), IM)
+                  V_mat <- inversematrix(mat1 - tcrossprod(prob, 
+                    prob))
                 }
                 D_mat1 <- D_mat[id_ind, ]
                 help_mat1 <- crossprod(D_mat1, V_mat)
@@ -202,8 +203,7 @@ function (Y, X_mat, coeffs, ncategories, id, repeated, offset,
         prob <- fitprob[id_ind]
         mat1 <- diagmod(prob)
         if (Ti == 1) {
-            V_mat <- inversemat(mat1 - tcrossprod(prob, prob), 
-                IM)
+            V_mat <- inversematrix(mat1 - tcrossprod(prob, prob))
         }
         else if (Ti == noccasions) {
             proball <- fitproball[extid_vector[[i]]]
@@ -221,8 +221,7 @@ function (Y, X_mat, coeffs, ncategories, id, repeated, offset,
             }
             mat1[sel_mat[[noccasions - 1]]] <- aperm(mat1, c(2, 
                 1))[sel_mat[[noccasions - 1]]]
-            V_mat <- inversemat(mat1 - tcrossprod(prob, prob), 
-                IM)
+            V_mat <- inversematrix(mat1 - tcrossprod(prob, prob))
         }
         else {
             Tiid <- times_mat[[i]]
@@ -241,8 +240,7 @@ function (Y, X_mat, coeffs, ncategories, id, repeated, offset,
             }
             mat1[sel_mat[[Ti - 1]]] <- aperm(mat1, c(2, 1))[sel_mat[[Ti - 
                 1]]]
-            V_mat <- inversemat(mat1 - tcrossprod(prob, prob), 
-                IM)
+            V_mat <- inversematrix(mat1 - tcrossprod(prob, prob))
         }
         D_mat1 <- D_mat[id_ind, ]
         help_mat1 <- crossprod(D_mat1, V_mat)

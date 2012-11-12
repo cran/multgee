@@ -1,0 +1,8 @@
+Version 1.1 [2012-11-07]
+ * Added an R(>=2.15.0) dependency.
+ * Minor changes in the fitLORgee function.
+ * Fixed contrasts in the nomLORgee and ordLORgee functions.
+ * Added information regarding the "LORgee" class.
+
+Version 1.0 [2012-11-07]
+ * The first version of the R package multgee is released on CRAN.
