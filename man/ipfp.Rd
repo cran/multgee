@@ -7,7 +7,8 @@ IPFP
 IPFP function for square tables.
 }
 \usage{
-ipfp(initial, rowmars, colmars, dimension, maxit = ipfp.control()$maxit, tol = ipfp.control()$tol)
+ipfp(initial, rowmars, colmars, dimension,
+maxit = ipfp.control()$maxit, tol = ipfp.control()$tol)
 }
 \arguments{
   \item{initial}{

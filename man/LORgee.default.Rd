@@ -1,10 +1,10 @@
 \name{LORgee.default}
 \alias{LORgee.default}
 \title{
-LOR 
+The class \code{LORgee}. 
 }
 \description{
-Internal Function.
+The class \code{LORgee}.
 }
 \usage{
 LORgee.default(x, ...)
@@ -20,4 +20,4 @@ other other arguments.
 \author{
 Anestis Touloumis
 }
-\keyword{ internal }
+\keyword{internal}

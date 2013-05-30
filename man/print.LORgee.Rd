@@ -20,5 +20,5 @@ other arguments.
 \author{
 Anestis Touloumis
 }
-\keyword{ internal }
+\keyword{internal}
 

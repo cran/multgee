@@ -9,7 +9,7 @@ function (object , ...)
     TAB <- round(TAB, 5)
     colnames(TAB) <- c("Estimate", "san.se", "san.z", "Pr(>|san.z|)")
     res <- list(title = object$title, version = object$version, coefficients = TAB, 
-        link = object$link, odds.ratio = object$odds.ratio, call = object$call, 
+        link = object$link, local.odds.ratios = object$local.odds.ratios, call = object$call, 
         residuals = object$residuals, niter = object$convergence$niter, 
         pvalue = object$pvalue)
     class(res) <- "summary.LORgee"

@@ -11,15 +11,15 @@ function (x, ...)
     print(x$coefficients)
     cat("\nNumber of iterations:", x$convergence$niter, "\n")
     cat("Algorithm converged:", x$convergence$conv, "\n")
-    if (6 <= nrow(x$odds.ratio$theta)) {
-        cat("\nLocal Odds Ratio Structure[1:6,1:6]\n")
-        print(x$odds.ratio$theta[1:6, 1:6])
+    if (6 <= nrow(x$local.odds.ratios$theta)) {
+        cat("\nLocal Odds Ratios Structure[1:6,1:6]\n")
+        print(x$local.odds.ratios$theta[1:6, 1:6])
     }
     else {
-        cat("\nLocal Odds Ratio Structure[1:6,1:6]\n")
-        print(x$odds.ratio$theta)
+        cat("\nLocal Odds Ratios Estimates[1:6,1:6]\n")
+        print(x$local.odds.ratios$theta)
     }
     if (!is.null(x$pvalue)) 
-        cat("\npvalue of Null model:", round(x$pvalue, 4), "\n")
+        cat("\npvalue of Null model:", ifelse(x$pvalue<0.0001,"<0.0001", round(x$pvalue,4)), "\n")
 }
 
