@@ -1,6 +1,6 @@
-0158d175c5ed9324f46a405f53bbe79c *DESCRIPTION
+3f482f938ec8615f4679a6f1b2f167f2 *DESCRIPTION
 7ebc00f4c982006067cb7db9ccb22a6a *NAMESPACE
-9003addf05e6c33d87dfca11b24a88c6 *NEWS
+3f185c4e6507901e0fe47b33c853e010 *NEWS
 0157736678c00843f921b2f3a2c95f3a *R/LORgee.R
 3f385ae71886334f43d48eb6465ffb94 *R/LORgee.control.R
 0a83d1d148d61e3b7f718984e63ce27d *R/LORgee.default.R
@@ -22,10 +22,10 @@ c0f0f2efcca0e869c21412fde69ff284 *R/ipfp.control.R
 85df681fed135745ceb30b4ede44b189 *R/matrixLOR.R
 fac0fbdeb2cd0fef2bec55b2bcc91a01 *R/mmpar.R
 c11a168afea81c4ca30485e42e2a3f99 *R/muprob.R
-d2fc5f23129c29fa1c2a5578136cc003 *R/nomLORgee.R
+d42ad44f64f0dab78bafa8f281d1abc0 *R/nomLORgee.R
 cbb99a89cd21c06d37a7c9821d3008dc *R/normscores.R
 010c58f54d0cda548e6842c694528c16 *R/odds.ratio.R
-a4bbfbf02afede1417399f6d9c988986 *R/ordLORgee.R
+21e8fb2e8c05fc1ca7a0e7782e7092e2 *R/ordLORgee.R
 be03694218ca9627c27dfcf1c426cf10 *R/print.LORgee.R
 7d072cfb2ba062d537de5b95bf132347 *R/print.summary.LORgee.R
 fda2969edae8df371717933ab6a017f7 *R/print.waldts.R

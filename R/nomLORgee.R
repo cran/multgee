@@ -161,7 +161,7 @@ function (formula = formula(data), data = parent.frame(), id = id, repeated = re
     fit <- list()
     fit$call <- call
     fit$title <- "GEE FOR NOMINAL MULTINOMIAL RESPONSES"
-    fit$version <- "version 1.2 modified 2013-05-30"
+    fit$version <- "version 1.3 modified 2013-06-21"
     fit$link <- c("Baseline Category Logit")
     fit$local.odds.ratios <- list()
     fit$local.odds.ratios$structure <- LORstr
