@@ -23,7 +23,7 @@ function(x,...)
     object$xnames <- x$xnames
     object$categories <- x$categories
     object$occasions <- x$occasions
-    object$gee.control <- x$gee.control 
+    object$LORgee.control <- x$LORgee.control 
     object$ipfp.control <- x$ipfp.control
     object$inverse.method <- x$inverse.method
     object$adding.constant <- x$adding.constant

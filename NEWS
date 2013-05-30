@@ -1,7 +1,15 @@
+Version 1.2 [2013-05-30]
+ * Added the function waldts for testing goodness of fit between nested GEE models.
+ * The arguments id and repeated in the functions nomLORgee and ordLORgee should not be provided in character string.
+ * Made optional the data argument in the functions nomLORgee and ordLORgee.
+ * Minor changes in the class "LORgee".
+ * Updated help files.
+ * Created a citation file.
+
 Version 1.1 [2012-11-07]
  * Added an R(>=2.15.0) dependency.
- * Minor changes in the fitLORgee function.
- * Fixed contrasts in the nomLORgee and ordLORgee functions.
+ * Minor changes in the function fitLORgee.
+ * Fixed contrasts in the functions nomLORgee and ordLORgee.
  * Added information regarding the "LORgee" class.
 
 Version 1.0 [2012-11-07]

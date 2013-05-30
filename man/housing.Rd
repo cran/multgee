@@ -12,14 +12,13 @@ Housing status for 362 severely mentally ill homeless subjects measured at basel
   A data frame with 1448 observations on the following 4 variables:
   \describe{
     \item{\code{id}}{Subject identifier variable.}
-    \item{\code{y}}{Housing status response, coded as (0) for street living, (1) for community living and (2) for independent housing.}
-    \item{\code{time}}{Measurement occasions variable, coded as (0) at baseline, (1) at 6 months, (2) at twelve months and (3) at twenty four months.}
+    \item{\code{y}}{Housing status response, coded as (1) for street living, (2) for community living and (3) for independent housing.}
+    \item{\code{time}}{Time recorded in months.}
     \item{\code{sec}}{Section 8 rent certificate indicator.}
   }
 }
 \source{
-Hedeker, D. (2003). A mixed-effects multinomial logistic regression model. 
-\emph{Statistics in Medicine}, 22, 1433--1446.
+Hulrburt M.S., Wood, P.A. and Hough, R.L. (1996). Providing independent housing for the homeless mentally ill: a novel approach to evaluating longitudinal housing patterns. \emph{Journal of Community Psychology}, \bold{24}, 291--310.
 }
 \examples{
 data(housing)

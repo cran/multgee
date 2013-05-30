@@ -4,7 +4,7 @@
 IPFP Control
 }
 \description{
-Control function for the Iterative Proportion Fitting Procedure function \code{ipfp}.
+Control variables for the Iterative Proportion Fitting Procedure function \code{ipfp}.
 }
 \usage{
 ipfp.control(tol = 1e-06, maxit = 200)
@@ -21,7 +21,7 @@ positive integer that indicates the maximum number of iterations.
 Anestis Touloumis
 }
 \note{
-Currently \code{ipfp} function is internal.
+Currently the function \code{ipfp} is internal.
 }
 \seealso{
 \link{nomLORgee} and \link{ordLORgee}.

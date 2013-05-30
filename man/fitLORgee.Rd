@@ -7,7 +7,9 @@ Internal Fit Function
 Internal Fit Function.
 }
 \usage{
-fitLORgee(Y, X_mat, coeffs, ncategories, id, repeated, offset, link, LORterm, marpars, ipfp.ctrl, control, IM, LORem = LORem, LORstr = LORstr, add)
+fitLORgee(Y, X_mat, coeffs, ncategories, id, repeated, offset, link,
+          LORterm, marpars, ipfp.ctrl, control, IM, LORem = LORem,
+           LORstr = LORstr, add)
 }
 \arguments{
   \item{Y}{

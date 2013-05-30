@@ -17,11 +17,11 @@ Rheumatoid self-assessment scores for 302 patients, measured on a five-level ord
     \item{\code{age}}{Recorded at the baseline.}
     \item{\code{trt}}{Treatment group variable, coded as (1) for the placebo group and (2) for the drug group.}
     \item{\code{baseline}}{Self-assessment score of rheumatoid arthritis at the baseline.}
-    \item{\code{time}}{Measurement occasions variable, coded as (1) at one month, (2) at three months and (3) at five months.}
-  }
+    \item{\code{time}}{Follow-up time recorded in months.}
+  } 
 }
 \source{
-Lipsitz, S.R. and Kim, K. and Zhao, L. (1994). Analysis of repeated categorical data using generalized estimating equations. \emph{Statistics in Medicine}, 13, 1149--1163.
+Lipsitz, S.R. and Kim, K. and Zhao, L. (1994). Analysis of repeated categorical data using generalized estimating equations. \emph{Statistics in Medicine}, \bold{13}, 1149--1163.
 }
 \examples{
 data(arthritis)

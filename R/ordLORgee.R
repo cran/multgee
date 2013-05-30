@@ -1,16 +1,62 @@
 ordLORgee <-
-function (formula = formula, data = data, id = id, repeated = repeated, 
+function (formula = formula(data), data = parent.frame(), id = id, repeated = repeated, 
     link = "logistic", bstart = NULL, LORstr = "category.exch", 
     LORem = "3way", LORterm = NULL, add = 0, homogeneous = TRUE, 
     restricted = FALSE, control = LORgee.control(), 
     ipfp.ctrl = ipfp.control(), IM = "solve") 
 {
     options(contrasts=c("contr.treatment", "contr.poly"))
+    call <- match.call() 
+    mcall <- match.call(expand.dots=FALSE)
+    mf <- match(c("formula", "data", "id", "repeated"), names(mcall), 0L)
+    m <- mcall[c(1L, mf)]
+    if (is.null(m$id)) 
+        m$id <- as.name("id")
+    if (is.null(m$repeated)) 
+        m$repeated <- as.name("repeated")
+    m[[1]] <- as.name("model.frame")
+    m <- eval(m, envir = parent.frame())
+    Terms <- attr(m, "terms") 
+    if(attr(Terms,"intercept")!=1) 
+       stop("an intercept must be included")
+    Y <- as.numeric(factor(model.response(m)))
+    if (is.null(Y)) {
+        stop("response variable not found")
+    }
+    ncategories <- nlevels(factor(Y))
+    if (ncategories <= 2) 
+        stop("The response variable should have more than 2 categories")
+    id <- model.extract(m, "id")
+    if (is.null(id)) {
+        stop("'id' variable not found")
+    }
+    if (length(id) != length(Y)) 
+        stop("response variable and 'id' are not of same length")
+    repeated <- model.extract(m, "repeated")
+    if (is.null(repeated)) {
+        stop("'repeated' variable not found")
+    }
+    if (length(repeated) != length(Y)) 
+        stop("response variable and 'repeated' are not of same length")
+    id <- as.numeric(factor(id))
+    repeated <- as.numeric(factor(repeated))
+    if(all(id==repeated)) 
+         stop("'repeated' and 'id' must not be equal")
+    dummy <- split(repeated, id)
+    if (any(unlist(lapply(dummy, length)) != unlist(lapply(lapply(dummy, 
+        unique), length)))) 
+        stop("'repeated' does not have unique values per 'id'")
+    offset <- model.extract(m, "offset")
+    if (length(offset) <= 1) 
+    offset <- rep(0, length(Y))
+    if (length(offset) != length(Y)) 
+        stop("response variable and 'offset' are not of same length")
+    offset <- as.double(offset)
     LORstrs <- c("independence", "uniform", "category.exch", 
         "time.exch", "RC","fixed")
     icheck <- as.integer(match(LORstr, LORstrs, -1))
     if (icheck < 1) {
-        stop("unknown odds ratio structure")
+        stop("unknown local odds ratios structure")
     }
     if (LORstr == "independence" | LORstr == "fixed") {
         LORem <- NULL
@@ -48,38 +94,6 @@ function (formula = formula, data = data, id = id, repeated = repeated,
     icheck <- as.integer(match(IM, IMs, -1))
     if (icheck < 1) 
         stop("unknown method for inverting a matrix")
-    if (missing(data)) 
-        stop("Dataframe not found")
-    if (!is.data.frame(data)) 
-        data <- data.frame(data)
-    rownames(data) <- 1:nrow(data)
-    m <- model.frame(formula, data)
-    nonmissrows <- as.numeric(rownames(m))
-    data <- data[nonmissrows, ]
-    if (missing(id)) 
-        stop("ID variable not determined")
-    id <- as.character(id)
-    if (match(id, names(data), 0) == 0) 
-        stop("ID variable not found in the dataframe")
-    if (missing(repeated)) 
-        stop("'repeated' not found")
-    repeated <- as.character(repeated)
-    if (match(repeated, names(data), 0) == 0) 
-        stop("'repeated' not found in 'data'")
-    data <- data[order(data[, id], data[, repeated], na.last = NA), 
-        ]
-    rownames(data) <- seq.int(nrow(data))
-    id <- as.numeric(factor(data[, id]))
-    repeated <- as.numeric(factor(data[, repeated]))
-    dummy <- split(repeated, id)
-    if (all(unlist(lapply(dummy, length)) != unlist(lapply(lapply(dummy, 
-        unique), length)))) 
-        stop("'repeated' does not have unique values per 'id'")
-    Y <- as.numeric(factor(model.response(model.frame(formula, 
-        data = data))))
-    ncategories <- nlevels(factor(Y))
-    if (ncategories <= 2) 
-        stop("The response should have more than 2 categories")
     if (LORstr != "independence" & LORstr != "fixed") {
         data.model <- datacounts(Y, id, repeated, ncategories)
         marpars <- mmpar(LORem, LORstr, max(data.model$tp), homogeneous)
@@ -88,8 +102,6 @@ function (formula = formula, data = data, id = id, repeated = repeated,
         LORterm <- fitmm(data.model, marpars,homogeneous, 
             restricted, add)
     }
-    id <- rep(id, each = ncategories - 1)
-    repeated <- rep(repeated, each = ncategories - 1)
     link <- as.character(link)
     link <- switch(link, logistic = "logit", probit = "probit", 
         cloglog = "cloglog", cauchit = "cauchit", acl = "acl")
@@ -101,31 +113,48 @@ function (formula = formula, data = data, id = id, repeated = repeated,
         if (link == "probit") family <- cumulative("probit", parallel = TRUE)
         if (link == "cloglog") family <- cumulative("cloglog", parallel = TRUE)
         if (link == "cauchit") family <- cumulative("cauchit", parallel = TRUE)
-        capture.output(coeffs <- vglm(formula, data = data, family = family), 
-            file = "NUL")
-        coeffs <- as.numeric(as.vector(coef(coeffs)))
+           mmcall <- match.call(expand.dots=FALSE)
+           mmf <- match(c("formula", "data", "id", "repeated"), names(mmcall), 0L)
+           mm <- mcall[c(1L, mmf)]
+           mm$family <- family
+           mm$control = vglm.control()
+           mm[[1]] <- as.name("vglm")
+           coeffs <- coef(eval(mm, parent.frame()))
+           coeffs <- as.numeric(coeffs)
         if (!is.numeric(coeffs)) 
             stop("Please insert initial values")
         if (verbose) {
             cat("\nGEE FOR ORDINAL MULTINOMIAL RESPONSES\n")
             cat("\nrunning 'vglm' function to get initial regression estimates\n")
             print(matrix(coeffs, ncol = 1, dimnames = list(1:length(coeffs), 
-                "Initial.Values")))
+               "Initial.Values")))
         }
     }
-    data <- data.frame(lapply(data, function(x) rep(x, each = ncategories - 
-        1)))
-    Intercept <- rep.int(seq(ncategories - 1), length(id)/(ncategories - 
-        1))
-    data <- cbind(data, Intercept)
-    m <- model.frame(update(formula, ~factor(Intercept) + . - 
-        1), data = data)
-    Terms <- attr(m, "terms")
-    Y <- as.numeric(factor(model.response(m)))
+    Y <- rep(Y, each=ncategories-1)
+    Intercept <- rep.int(seq(ncategories - 1),length(id))
     Y <- as.numeric(Y == Intercept)
+    id <- rep(id, each = ncategories - 1)
+    repeated <- rep(repeated, each = ncategories - 1)    
+    offset <- rep(offset, each = ncategories-1)
     X_mat <- model.matrix(Terms, m)
+    if(ncol(X_mat)>2){
     xnames <- colnames(X_mat)
-    X_mat <- matrix(X_mat, ncol = ncol(X_mat), dimnames = NULL)
+    X_mat <- apply(X_mat[,-1],2,function(x) rep(x,each = ncategories-1))
+    X_mat1 <- model.matrix(~factor(Intercept)-1)    
+    X_mat <- cbind(X_mat1,X_mat)
+    X_mat <- matrix(X_mat, ncol= ncol(X_mat), dimnames = NULL)
+    xnames <- c(paste("beta0", 1:(ncategories - 1), sep = ""), xnames[-1])    
+                      } else if(ncol(X_mat)==2) {
+    xnames <- colnames(X_mat)
+    X_mat <- rep(X_mat[,-1],each = ncategories-1)
+    X_mat1 <- model.matrix(~factor(Intercept)-1)    
+    X_mat <- cbind(X_mat1,X_mat)
+    X_mat <- matrix(X_mat, ncol= ncol(X_mat), dimnames = NULL)
+    xnames <- c(paste("beta0", 1:(ncategories - 1), sep = ""), xnames[-1]) 
+                      } else {
+    X_mat <- model.matrix(~factor(Intercept)-1)
+    xnames <- c(paste("beta0", 1:(ncategories - 1), sep = ""))
+                      }    
     if (link == "acl") {
         dummy <- ncategories - 1
         dummy.matrix <- diagmod(rep.int(1, dummy))
@@ -137,12 +166,6 @@ function (formula = formula, data = data, id = id, repeated = repeated,
                 nrow(X_mat)/dummy)
         }
     }
-    offset <- model.offset(m)
-    if (length(offset) <= 1) 
-        offset <- rep(0, length(Y))
-    if (length(offset) != length(Y)) 
-        stop("'offset' and 'y' not same length")
-    offset <- as.double(offset)
     if (!is.null(bstart)) {
         coeffs <- as.numeric(bstart)
         if (length(coeffs) != ncol(X_mat)) 
@@ -156,30 +179,34 @@ function (formula = formula, data = data, id = id, repeated = repeated,
                 "Initial.Values")))
         }
     }
+    ordindex <- order(id,repeated)
+    Y <- Y[ordindex]
+    X_mat <- X_mat[ordindex,]
+    id <- id[ordindex]
+    repeated <- repeated[ordindex]
+    offset <- offset[ordindex]
     fitmod <- fitLORgee(Y, X_mat, coeffs, ncategories, id, repeated, offset, 
     link, LORterm, marpars, ipfp.ctrl, control, IM, LORem = LORem, 
     LORstr = LORstr, add)
     fit <- list()
+    fit$call <- call
     fit$title <- "GEE FOR ORDINAL MULTINOMIAL RESPONSES"
-    fit$version <- "version 1.1 modified 10-11-2012"
+    fit$version <- "version 1.2 modified 2013-05-30"
     fit$link <- if (link == "acl") 
         paste("Adjacent Category Logit")
     else paste("Cumulative", link, sep = " ")
-    fit$odds.ratio <- list()
-    fit$odds.ratio$structure <- LORstr
-    fit$odds.ratio$model <- LORem
-    fit$odds.ratio$homogeneous <- homogeneous
-    fit$odds.ratio$restricted <- restricted
-    fit$odds.ratio$theta <- fitmod$theta
-    fit$terms <- attr(m, "terms")
+    fit$local.odds.ratios <- list()
+    fit$local.odds.ratios$structure <- LORstr
+    fit$local.odds.ratios$model <- LORem
+    fit$local.odds.ratios$homogeneous <- homogeneous
+    fit$local.odds.ratios$restricted <- restricted
+    fit$local.odds.ratios$theta <- fitmod$theta
+    fit$terms <- Terms
     fit$contrasts <- attr(model.matrix(Terms, m), "contrasts")
-    fit$nobs <- nrow(data)
     fit$convergence <- list()
     fit$convergence$niter <- fitmod$iter
     fit$convergence$criterion <- fitmod$crit[fitmod$iter]
     fit$convergence$conv <- fitmod$conv
-    xnames[1:(ncategories - 1)] <- paste("beta0", 1:(ncategories - 
-        1), sep = "")
     fit$coefficients <- fitmod$beta_mat[, fitmod$iter + 1]
     names(fit$coefficients) <- xnames
     fit$linear.predictors <- matrix(fitmod$linear.predictor, 
@@ -204,10 +231,11 @@ function (formula = formula, data = data, id = id, repeated = repeated,
     y <- as.numeric(y)
     y[is.na(y)] <- ncategories
     fit$y <- y
-    fit$id <- id
+    fit$nobs <- length(y)
     fit$max.id <- max(unique(id))
     fit$clusz <- unlist(lapply(split(id, id), length))/(ncategories - 
         1)
+    fit$id <- rep(1:fit$max.id,as.numeric(fit$clusz))
     fit$robust.variance <- fitmod$robust
     dimnames(fit$robust.variance) <- list(xnames, xnames)
     fit$naive.variance <- fitmod$naive
@@ -215,11 +243,10 @@ function (formula = formula, data = data, id = id, repeated = repeated,
     fit$xnames <- xnames
     fit$categories <- ncategories
     fit$occasions <- sort(unique(repeated))
-    fit$gee.control <- control
+    fit$LORgee.control <- control
     fit$ipfp.control <- ipfp.ctrl
     fit$inverse.method <- IM
     fit$adding.constant <- add
-    fit$call <- match.call()
     if (control$TRACE) {
         fit$trace <- list()
         fit$trace$coeffs <- fitmod$beta_mat
@@ -237,4 +264,3 @@ function (formula = formula, data = data, id = id, repeated = repeated,
     class(fit) <- "LORgee"
     fit
 }
-

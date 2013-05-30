@@ -4,7 +4,7 @@
 Creating A Probability Matrix With Specified Local Odds Ratios
 }
 \description{
-Utility function to create a square probability matrix with a specified local odds ratios structure.
+Utility function to create a square probability matrix that satifies the specified local odds ratios structure.
 }
 \usage{
 matrixLOR(x)
@@ -15,13 +15,13 @@ a square matrix with positive entries that describes the desired local odds rati
 }
 }
 \value{
-Returns a square probability matrix that satisfies the local odds ratios structure described by \code{x}.
+Returns a square probability matrix that satisfies the local odds ratios structure defined by \code{x}.
 }
 \section{Warning}{
 Caution is needed for local odds ratios close to zero.
 }
 \details{
-This function is designed to ease the construction of a fixed local odds ratios structure in the functions \link{nomLORgee} or \link{ordLORgee}. See also the example.
+This function is designed to ease the construction of the \code{LORterm} argument in the functions \link{nomLORgee} and \link{ordLORgee}.
 }
 \author{
 Anestis Touloumis
@@ -30,7 +30,7 @@ Anestis Touloumis
 \link{nomLORgee} and \link{ordLORgee}.
 }
 \examples{
-## Illustrating the construction of a "fixed" local odds ratio structure 
+## Illustrating the construction of a "fixed" local odds ratios structure 
 ## using the arthritis dataset. Here, we assume a uniform local odds ratios 
 ## structure equal to 2 for each time pair.
 
@@ -40,9 +40,11 @@ lorterm <- matrixLOR(matrix(2,4,4))
 ## Create the LORterm argument.
 lorterm <- c(lorterm)
 lorterm <- matrix(c(lorterm),3,25,TRUE)
+
+## Fit the marginal model.
 data(arthritis)
-fitmod.fixed <- ordLORgee(y~factor(trt)+factor(time)+factor(baseline), id="id",
-                 repeated="time", data=arthritis, LORstr="fixed", LORterm=lorterm)
+fitmod.fixed <- ordLORgee(y~factor(trt)+factor(time)+factor(baseline),data=arthritis,
+                id=id,repeated=time,LORstr="fixed",LORterm=lorterm)
 fitmod.fixed
 }
 
