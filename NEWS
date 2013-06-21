@@ -1,3 +1,6 @@
+Version 1.3 [2013-06-21]
+ * Changed the licence to GLP-2 | GLP-3.
+
 Version 1.2 [2013-05-30]
  * Added the function waldts for testing goodness of fit between nested GEE models.
  * The arguments id and repeated in the functions nomLORgee and ordLORgee should not be provided in character string.

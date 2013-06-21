@@ -191,7 +191,7 @@ function (formula = formula(data), data = parent.frame(), id = id, repeated = re
     fit <- list()
     fit$call <- call
     fit$title <- "GEE FOR ORDINAL MULTINOMIAL RESPONSES"
-    fit$version <- "version 1.2 modified 2013-05-30"
+    fit$version <- "version 1.3 modified 2013-06-21"
     fit$link <- if (link == "acl") 
         paste("Adjacent Category Logit")
     else paste("Cumulative", link, sep = " ")
