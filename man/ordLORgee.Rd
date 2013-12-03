@@ -7,8 +7,8 @@ Marginal Models For Correlated Ordinal Multinomial Responses
 Solving the generalized estimating equations for correlated ordinal multinomial responses assuming a cumulative link model or an adjacent categories logit model for the marginal probabilities.
 }
 \usage{
-ordLORgee(formula, data, id = id, repeated = repeated, 
-          link = "logistic", bstart = NULL, LORstr = "category.exch",
+ordLORgee(formula, data, id = id, repeated = NULL, 
+          link = "logit", bstart = NULL, LORstr = "category.exch",
           LORem = "3way", LORterm = NULL, add = 0, homogeneous = TRUE, 
           restricted = FALSE, control = LORgee.control(), 
           ipfp.ctrl = ipfp.control(), IM = "solve")
@@ -24,10 +24,10 @@ an optional data frame containing the variables provided in \code{formula}, \cod
 a vector that identifies the clusters.
 }
   \item{repeated}{
-a vector that identifies the order of observations within each cluster.
+an optional vector that identifies the order of observations within each cluster.
 }
   \item{link}{
-a character string that specifies the link function. Options include \code{"logistic"}, \code{"probit"}, 
+a character string that specifies the link function. Options include \code{"logit"}, \code{"probit"}, 
 \code{"cauchit"}, \code{"cloglog"} or \code{"acl"}.
 }
   \item{bstart}{
@@ -67,13 +67,13 @@ The \code{data} must be provided in case level or equivalently in `long' format.
 
 A term of the form \code{offset(expression)} is allowed in the right hand side of \code{formula}.
 
-The default set for the response categories is \eqn{\{1,\ldots,I\}}, where \eqn{I>2} is the maximum observed response category. If otherwise, the function recodes the observed response categories onto this set. 
+The default set for the response categories is \eqn{\{1,\ldots,J\}}, where \eqn{J>2} is the maximum observed response category. If otherwise, the function recodes the observed response categories onto this set. 
 
-The \eqn{I}-th response category is omitted.
+The \eqn{J}-th response category is omitted.
 
 The default set for the \code{id} labels is \eqn{\{1,\ldots,N\}}, where \eqn{N} is the sample size. If otherwise, the function recodes the given labels onto this set. 
 
-The default set for the levels of \code{repeated} is \eqn{\{1,\ldots,T\}}, where \eqn{T} is the number of observed levels. If otherwise, the function recodes the given levels onto this set. 
+The argument \code{repeated} can be ignored only when \code{data} is written in such a way that the \eqn{t}-th observation in each cluster is recorded at the \eqn{t}-th measurement occasion. If this is not the case, then the user must provide \code{repeated}. The suggested set for the levels of \code{repeated} is \eqn{\{1,\ldots,T\}}, where \eqn{T} is the number of observed levels. If otherwise, the function recodes the given levels onto this set. 
 
 The variables \code{id} and \code{repeated} do not need to be pre-sorted. Instead the function reshapes \code{data} in an ascending order of \code{id} and \code{repeated}.
 
@@ -85,7 +85,7 @@ The marginal adjacent categories logit model
 \deqn{log \frac{Pr(Y_{it}=j |x_{it})}{Pr(Y_{it}=j+1 |x_{it})}=\beta_{0j} +\beta^{'} x_{it}}
 is fitted if and only if \code{link="acl"}. In contrast to a marginal cumulative link model, here the intercepts do not need to be monotone increasing.
      
-The \code{LORterm} argument must be an \eqn{L} x \eqn{I^2} matrix, where \eqn{L} is the number of level pairs of \code{repeated}. These are ordered as \eqn{(1,2), (1,3),\ldots,(1,T), (2,3),\ldots,(T-1,T)} and the rows of \code{LORterm} are supposed to preserve this order. Each row is assumed to contain the vectorized form of a probability table that satisfies the desired local odds ratios structure.
+The \code{LORterm} argument must be an \eqn{L} x \eqn{J^2} matrix, where \eqn{L} is the number of level pairs of \code{repeated}. These are ordered as \eqn{(1,2), (1,3),\ldots,(1,T), (2,3),\ldots,(T-1,T)} and the rows of \code{LORterm} are supposed to preserve this order. Each row is assumed to contain the vectorized form of a probability table that satisfies the desired local odds ratios structure.
 }
 \value{
 Returns an object of the class \code{"LORgee"}. This has components:
@@ -119,7 +119,7 @@ Returns an object of the class \code{"LORgee"}. This has components:
 Generic \link{coef}, \link{summary}, \link{print}, \link{fitted} and \link{residuals} methods are available. The \code{pvalue of the Null model} corresponds to the hypothesis \eqn{H_0: \beta=0} based on the Wald test statistic.  
 }
 \references{
-Touloumis, A., Agresti, A. and Kateri, M. (2013). GEE for multinomial responses using a local odds ratios parameterization. \emph{Biometrics}.
+Touloumis, A., Agresti, A. and Kateri, M. (2013). GEE for multinomial responses using a local odds ratios parameterization. \emph{Biometrics}, \bold{69}, 633-640.
 }
 \author{
 Anestis Touloumis
@@ -129,11 +129,9 @@ For a nominal response scale use the function \link{nomLORgee}.
 }
 \examples{
 data(arthritis)
-attach(arthritis)
-intrinsic.pars(y,id,time,5)
-fitmod <- ordLORgee(y~factor(time)+factor(trt)+factor(baseline),
-                    id=id,repeated=time,LORstr="uniform")
+intrinsic.pars(y,arthritis,id,time)
+fitmod <- ordLORgee(y~factor(time)+factor(trt)+factor(baseline), data=arthritis,
+                    id=id,LORstr="uniform",repeated=time)
 summary(fitmod)  
-detach(arthritis)
 }
 

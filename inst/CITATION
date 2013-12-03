@@ -5,9 +5,11 @@ citEntry(entry="Article",
          author = as.person("Touloumis, A., Agresti, A. and Kateri, M."),
          journal = "Biometrics",
          year = "2013",
+         volume="69",
+         pages="633--640",
          textVersion=paste("Touloumis, A., Agresti, A. and Kateri, M. (2013).",
                "GEE for multinomial responses using a local odds ratios parameterization,",
-               "Biometrics.")
+               "Biometrics, 69, 633-640")
          )
 
  
@@ -15,12 +17,12 @@ citEntry(entry="Manual",
          title = "multgee: A GEE Solver for Correlated Nominal or Ordinal Multinomial Responses",
          author = person("Anestis Touloumis"),
          year = "2013",
-         note = "Version 1.2",
+         note = "Version 1.4",
          url="http://CRAN.R-PROJECT.ORG/package=multgee",
          key="multgee-package",
          textVersion = paste("Touloumis, A. (2013).",
                "multgee: A GEE solver for Correlated Nominal or Ordinal Multinomial Responses,",
-               "version 1.2, URL http://CRAN.R-PROJECT.ORG/package=multgee")
+               "version 1.4, URL http://CRAN.R-PROJECT.ORG/package=multgee")
          )
 
 

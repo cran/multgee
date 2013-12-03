@@ -1,3 +1,9 @@
+Version 1.3 [2013-12-03]
+ * Made optional the argument repeated in the functions nomLORgee, ordLORgee and intrinsic.pars.
+ * Modified the arguments of the function intrinsic.pars. 
+ * Updated the CITATION file and the references in the help files.
+ * Updated maintainer's email address.
+
 Version 1.3 [2013-06-21]
  * Changed the licence to GLP-2 | GLP-3.
 
@@ -7,7 +13,7 @@ Version 1.2 [2013-05-30]
  * Made optional the data argument in the functions nomLORgee and ordLORgee.
  * Minor changes in the class "LORgee".
  * Updated help files.
- * Created a citation file.
+ * Created a CITATION file.
 
 Version 1.1 [2012-11-07]
  * Added an R(>=2.15.0) dependency.

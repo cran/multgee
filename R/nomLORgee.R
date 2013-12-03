@@ -1,5 +1,5 @@
 nomLORgee <-
-function (formula = formula(data), data = parent.frame(), id = id, repeated = repeated, 
+function (formula = formula(data), data = parent.frame(), id = id, repeated = NULL, 
     bstart = NULL, LORstr = "time.exch", LORem = "3way",
     LORterm = NULL, add = 0, homogeneous = TRUE, 
     control = LORgee.control(), ipfp.ctrl = ipfp.control(), IM = "solve") 
@@ -13,8 +13,6 @@ function (formula = formula(data), data = parent.frame(), id = id, repeated = re
     m <- mcall[c(1L, mf)]
     if (is.null(m$id)) 
         m$id <- as.name("id")
-    if (is.null(m$repeated)) 
-        m$repeated <- as.name("repeated")
     m[[1]] <- as.name("model.frame")
     m <- eval(m, envir = parent.frame())
     Terms <- attr(m, "terms") 
@@ -33,10 +31,11 @@ function (formula = formula(data), data = parent.frame(), id = id, repeated = re
     }
     if (length(id) != length(Y)) 
         stop("response variable and 'id' are not of same length")
-    repeated <- model.extract(m, "repeated")
-    if (is.null(repeated)) {
-        stop("'repeated' variable not found")
-    }
+   if (is.null(repeated)) {
+        index <- order(unlist(split(1:length(id),id)))
+        repeated <- c(unlist(sapply(unlist(lapply(split(id, id), length)), function(x) 1:x)))
+        repeated <- repeated[index]
+    }  else  repeated <- model.extract(m, "repeated")
     if (length(repeated) != length(Y)) 
         stop("response variable and 'repeated' are not of same length")
     id <- as.numeric(factor(id))
@@ -56,7 +55,7 @@ function (formula = formula(data), data = parent.frame(), id = id, repeated = re
     LORstrs <- c("independence", "time.exch", "RC", "fixed")
     icheck <- as.integer(match(LORstr, LORstrs, -1))
     if (icheck < 1) {
-        stop("unknown odds ratio structure")
+        stop("unknown local odds ratio structure")
     }
     if (LORstr == "independence" | LORstr == "fixed") {
         LORem <- NULL
@@ -161,7 +160,7 @@ function (formula = formula(data), data = parent.frame(), id = id, repeated = re
     fit <- list()
     fit$call <- call
     fit$title <- "GEE FOR NOMINAL MULTINOMIAL RESPONSES"
-    fit$version <- "version 1.3 modified 2013-06-21"
+    fit$version <- "version 1.4 modified 2013-12-01"
     fit$link <- c("Baseline Category Logit")
     fit$local.odds.ratios <- list()
     fit$local.odds.ratios$structure <- LORstr
