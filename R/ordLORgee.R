@@ -1,6 +1,6 @@
 ordLORgee <-
-function (formula = formula(data), data = parent.frame(), id = id, repeated = repeated, 
-    link = "logistic", bstart = NULL, LORstr = "category.exch", 
+function (formula = formula(data), data = parent.frame(), id = id, repeated = NULL, 
+    link = "logit", bstart = NULL, LORstr = "category.exch", 
     LORem = "3way", LORterm = NULL, add = 0, homogeneous = TRUE, 
     restricted = FALSE, control = LORgee.control(), 
     ipfp.ctrl = ipfp.control(), IM = "solve") 
@@ -12,8 +12,6 @@ function (formula = formula(data), data = parent.frame(), id = id, repeated = re
     m <- mcall[c(1L, mf)]
     if (is.null(m$id)) 
         m$id <- as.name("id")
-    if (is.null(m$repeated)) 
-        m$repeated <- as.name("repeated")
     m[[1]] <- as.name("model.frame")
     m <- eval(m, envir = parent.frame())
     Terms <- attr(m, "terms") 
@@ -32,10 +30,11 @@ function (formula = formula(data), data = parent.frame(), id = id, repeated = re
     }
     if (length(id) != length(Y)) 
         stop("response variable and 'id' are not of same length")
-    repeated <- model.extract(m, "repeated")
     if (is.null(repeated)) {
-        stop("'repeated' variable not found")
-    }
+        index <- order(unlist(split(1:length(id),id)))
+        repeated <- c(unlist(sapply(unlist(lapply(split(id, id), length)), function(x) 1:x)))
+        repeated <- repeated[index]
+    }  else  repeated <- model.extract(m, "repeated")
     if (length(repeated) != length(Y)) 
         stop("response variable and 'repeated' are not of same length")
     id <- as.numeric(factor(id))
@@ -103,10 +102,11 @@ function (formula = formula(data), data = parent.frame(), id = id, repeated = re
             restricted, add)
     }
     link <- as.character(link)
-    link <- switch(link, logistic = "logit", probit = "probit", 
-        cloglog = "cloglog", cauchit = "cauchit", acl = "acl")
-    if (is.null(link)) 
-        stop("'link' must be \"logistic\", \"probit\", \"cloglog\", \"cauchit\" or \"acl\"")
+    links <- c("logit", "probit", "cloglog", "cauchit", "acl")
+    icheck <- as.integer(match(link, links,-1))
+    if (icheck < 1) { 
+        stop("'link' must be \"logit\", \"probit\", \"cloglog\", \"cauchit\" or \"acl\"")
+                    }
     if (is.null(bstart)) {
         if (link == "acl") family <- acat(reverse = TRUE, parallel = TRUE)
         if (link == "logit") family <- cumulative("logit", parallel = TRUE)
@@ -191,7 +191,7 @@ function (formula = formula(data), data = parent.frame(), id = id, repeated = re
     fit <- list()
     fit$call <- call
     fit$title <- "GEE FOR ORDINAL MULTINOMIAL RESPONSES"
-    fit$version <- "version 1.3 modified 2013-06-21"
+    fit$version <- "version 1.4 modified 2013-12-01"
     fit$link <- if (link == "acl") 
         paste("Adjacent Category Logit")
     else paste("Cumulative", link, sep = " ")
