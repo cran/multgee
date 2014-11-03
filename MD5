@@ -1,6 +1,5 @@
-255ba67a7c3d86bc4b1960c99963b925 *DESCRIPTION
-7ebc00f4c982006067cb7db9ccb22a6a *NAMESPACE
-88f50774f8e59c16b16221a337613856 *NEWS
+e79aa7bfea0e42c672fd664e8a0e1763 *DESCRIPTION
+0acf5551ad69ff72304ee7c0166c2421 *NAMESPACE
 0157736678c00843f921b2f3a2c95f3a *R/LORgee.R
 3f385ae71886334f43d48eb6465ffb94 *R/LORgee.control.R
 0a83d1d148d61e3b7f718984e63ce27d *R/LORgee.default.R
@@ -33,7 +32,8 @@ fda2969edae8df371717933ab6a017f7 *R/print.waldts.R
 4e3820e4d1c27343c9fecde67c1fec5b *R/waldts.R
 73456b60ccc6c3e7f2d00321dc5837ee *data/arthritis.rda
 6f363de2134ee7b95a725ebfebb59e89 *data/housing.rda
-2532a18309b69e01c20c3f4d907aabba *inst/CITATION
+5ce50d5a806653c658130b50bc91eb53 *inst/CITATION
+4489ae22df0429db25891c05b010d8d5 *inst/NEWS
 b9f099997d89b759e8550b7592bdecf3 *man/LORgee.Rd
 6309b0a3899f96d7ed14ed8bafd3dea5 *man/LORgee.control.Rd
 69c754ab6ea071c1f49607f9a147db7b *man/LORgee.default.Rd
@@ -56,7 +56,7 @@ dfb0255a1c1557e88fc17648c719f80b *man/inversemat.Rd
 70598a9a86a39f2f3cdcc20810bdb2ff *man/ipfp.control.Rd
 28905f04fb9170aaeb165130fd04bc50 *man/matrixLOR.Rd
 c64bf7683be0b8dc4764e40e27d582fa *man/mmpar.Rd
-de59eb68ff75f6d05dd65a016732e219 *man/multgee-package.Rd
+77993f05bd542ccd7c7ae96b5f339a70 *man/multgee-package.Rd
 75fcb37c1427a46558e8672c570ccbbf *man/muprob.Rd
 66d884aa7c51ed340c124696ca53d594 *man/nomLORgee.Rd
 7e9b15453ff5f1890f43b791e64e2124 *man/normscores.Rd

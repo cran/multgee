@@ -36,6 +36,8 @@ Becker, M. and Clogg, C. (1989). Analysis of sets of two-way contingency tables 
 Goodman, L. (1985). The analysis of cross-classified data having ordered and/or unordered categories: Association models, correlation models, and asymmetry models for contingency tables with or without missing entries. \emph{The Annals of Statistics}, \bold{13}, 10-69.
 
 Touloumis, A., Agresti, A. and Kateri, M. (2013). GEE for multinomial responses using a local odds ratios parameterization. \emph{Biometrics}, \bold{69}, 633-640.
+
+Touloumis, A. (2014). R Package multgee: A Generalized Estimating Equations Solver for Multinomial Responses. \emph{Journal of Statistical Software (to appear)}, \url{http://arxiv.org/abs/1410.5232}.
 }
 
 \seealso{

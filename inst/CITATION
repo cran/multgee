@@ -1,4 +1,4 @@
-citHeader("To cite the R package 'multgee' in publications please use:")
+citHeader("To cite the methodology implemented in 'multgee', please use:")
 
 citEntry(entry="Article",
          title = "GEE for multinomial responses using a local odds ratios parameterization",
@@ -8,21 +8,20 @@ citEntry(entry="Article",
          volume="69",
          pages="633--640",
          textVersion=paste("Touloumis, A., Agresti, A. and Kateri, M. (2013).",
-               "GEE for multinomial responses using a local odds ratios parameterization,",
-               "Biometrics, 69, 633-640")
+               "GEE for multinomial responses using a local odds ratios parameterization.",
+               "Biometrics 69, 633-640.")
          )
 
  
-citEntry(entry="Manual",
-         title = "multgee: A GEE Solver for Correlated Nominal or Ordinal Multinomial Responses",
-         author = person("Anestis Touloumis"),
-         year = "2013",
-         note = "Version 1.4",
-         url="http://CRAN.R-PROJECT.ORG/package=multgee",
-         key="multgee-package",
-         textVersion = paste("Touloumis, A. (2013).",
-               "multgee: A GEE solver for Correlated Nominal or Ordinal Multinomial Responses,",
-               "version 1.4, URL http://CRAN.R-PROJECT.ORG/package=multgee")
+citEntry(header="To cite the R package 'multgee' in publications, please use:",
+         entry="Article",
+         title = "R Package multgee: A Generalized Estimating Equations Solver for Multinomial Responses",
+         author = as.person("Touloumis, A."),
+         year = "2014",
+         journal = "To appear in Journal of Statistical Software",
+         URL="http://arxiv.org/abs/1410.5232",
+         textVersion=paste("Touloumis, A. (2014).",
+               "R Package multgee: A Generalized Estimating Equations Solver for Multinomial Responses.","Journal of Statistical Software (to appear), http://arxiv.org/abs/1410.5232.")
          )
 
 

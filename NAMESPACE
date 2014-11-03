@@ -3,4 +3,5 @@ S3method(print,LORgee)
 S3method(summary,LORgee)
 S3method(print,summary.LORgee)
 S3method(print,waldts)
+import(gnm,VGAM)
 
