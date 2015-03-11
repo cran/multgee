@@ -109,6 +109,8 @@ Generic \link{coef}, \link{summary}, \link{print}, \link{fitted} and \link{resid
 Touloumis, A. (2011). \emph{GEE for multinomial responses}. PhD dissertation, University of Florida.
 
 Touloumis, A., Agresti, A. and Kateri, M. (2013). GEE for multinomial responses using a local odds ratios parameterization. \emph{Biometrics}, \bold{69}, 633-640.
+
+Touloumis, A. (2015). R Package multgee: A Generalized Estimating Equations Solver for Multinomial Responses. \emph{Journal of Statistical Software}, \bold{64}, 1-14.
 }
 \author{
 Anestis Touloumis
@@ -119,6 +121,6 @@ For an ordinal response scale use the function \link{ordLORgee}.
 \examples{
 ## See the interpretation in Touloumis (2011).
 data(housing)
-fitmod <- nomLORgee(y~factor(time)*sec,data=housing,id=id)
+fitmod <- nomLORgee(y~factor(time)*sec,data=housing,id=id, repeated=time)
 summary(fitmod) 
 }

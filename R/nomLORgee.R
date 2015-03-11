@@ -4,21 +4,21 @@ function (formula = formula(data), data = parent.frame(), id = id, repeated = NU
     LORterm = NULL, add = 0, homogeneous = TRUE, 
     control = LORgee.control(), ipfp.ctrl = ipfp.control(), IM = "solve") 
 {
-    options(contrasts=c("contr.treatment", "contr.poly"))
-    restricted <- NULL
-    link <- "bcl"
-    call <- match.call() 
-    mcall <- match.call(expand.dots=FALSE)
-    mf <- match(c("formula", "data", "id", "repeated"), names(mcall), 0L)
-    m <- mcall[c(1L, mf)]
-    if (is.null(m$id)) 
-        m$id <- as.name("id")
-    m[[1]] <- as.name("model.frame")
-    m <- eval(m, envir = parent.frame())
-    Terms <- attr(m, "terms") 
+   options(contrasts=c("contr.treatment", "contr.poly"))
+   restricted <- NULL
+   link <- "bcl"
+   call <- match.call() 
+   mcall <- match.call(expand.dots=FALSE)
+   mf <- match(c("formula", "data", "id", "repeated"), names(mcall), 0L)
+   m <- mcall[c(1L, mf)]
+   if (is.null(m$id)) 
+   m$id <- as.name("id")
+   m[[1]] <- as.name("model.frame")
+   m <- eval(m, envir = parent.frame())
+   Terms <- attr(m, "terms") 
     if(attr(Terms,"intercept")!=1) 
        stop("an intercept must be included")
-    Y <- as.numeric(factor(model.response(m)))
+   Y <- as.numeric(factor(model.response(m)))
     if (is.null(Y)) {
         stop("response variable not found")
     }
@@ -31,11 +31,12 @@ function (formula = formula(data), data = parent.frame(), id = id, repeated = NU
     }
     if (length(id) != length(Y)) 
         stop("response variable and 'id' are not of same length")
-   if (is.null(repeated)) {
-        index <- order(unlist(split(1:length(id),id)))
-        repeated <- c(unlist(sapply(unlist(lapply(split(id, id), length)), function(x) 1:x)))
-        repeated <- repeated[index]
-    }  else  repeated <- model.extract(m, "repeated")
+    repeated <- model.extract(m, "repeated")
+    if (is.null(repeated)) {
+      index <- order(unlist(split(1:length(id),id)))
+      repeated <- c(unlist(sapply(unlist(lapply(split(id, id), length)), function(x) 1:x)))
+      repeated <- repeated[index]
+    }
     if (length(repeated) != length(Y)) 
         stop("response variable and 'repeated' are not of same length")
     id <- as.numeric(factor(id))
@@ -160,7 +161,7 @@ function (formula = formula(data), data = parent.frame(), id = id, repeated = NU
     fit <- list()
     fit$call <- call
     fit$title <- "GEE FOR NOMINAL MULTINOMIAL RESPONSES"
-    fit$version <- "version 1.4 modified 2013-12-01"
+    fit$version <- "version 1.5.1 modified 2015-03-09"
     fit$link <- c("Baseline Category Logit")
     fit$local.odds.ratios <- list()
     fit$local.odds.ratios$structure <- LORstr

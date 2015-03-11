@@ -26,11 +26,12 @@ function(y = y, data = parent.frame(), id = id, repeated = NULL, rscale="ordinal
     }
     if (length(id) != length(Y)) 
         stop("response variable and 'id' are not of same length")
+    repeated <- model.extract(m, "repeated")
     if (is.null(repeated)) {
         index <- order(unlist(split(1:length(id),id)))
         repeated <- c(unlist(sapply(unlist(lapply(split(id, id), length)), function(x) 1:x)))
         repeated <- repeated[index]
-    } else repeated <- model.extract(m, "repeated")
+    }
     if (length(repeated) != length(Y)) 
         stop("response variable and 'repeated' are not of same length")
     id <- as.numeric(factor(id))

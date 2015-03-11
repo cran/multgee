@@ -37,7 +37,7 @@ Goodman, L. (1985). The analysis of cross-classified data having ordered and/or 
 
 Touloumis, A., Agresti, A. and Kateri, M. (2013). GEE for multinomial responses using a local odds ratios parameterization. \emph{Biometrics}, \bold{69}, 633-640.
 
-Touloumis, A. (2014). R Package multgee: A Generalized Estimating Equations Solver for Multinomial Responses. \emph{Journal of Statistical Software (to appear)}, \url{http://arxiv.org/abs/1410.5232}.
+Touloumis, A. (2015). R Package multgee: A Generalized Estimating Equations Solver for Multinomial Responses. \emph{Journal of Statistical Software}, \bold{64}, 1-14. 
 }
 
 \seealso{

@@ -30,11 +30,12 @@ function (formula = formula(data), data = parent.frame(), id = id, repeated = NU
     }
     if (length(id) != length(Y)) 
         stop("response variable and 'id' are not of same length")
+    repeated <- model.extract(m, "repeated")
     if (is.null(repeated)) {
         index <- order(unlist(split(1:length(id),id)))
         repeated <- c(unlist(sapply(unlist(lapply(split(id, id), length)), function(x) 1:x)))
         repeated <- repeated[index]
-    }  else  repeated <- model.extract(m, "repeated")
+    }
     if (length(repeated) != length(Y)) 
         stop("response variable and 'repeated' are not of same length")
     id <- as.numeric(factor(id))
@@ -191,7 +192,7 @@ function (formula = formula(data), data = parent.frame(), id = id, repeated = NU
     fit <- list()
     fit$call <- call
     fit$title <- "GEE FOR ORDINAL MULTINOMIAL RESPONSES"
-    fit$version <- "version 1.4 modified 2013-12-01"
+    fit$version <- "version 1.5.1 modified 2015-03-09"
     fit$link <- if (link == "acl") 
         paste("Adjacent Category Logit")
     else paste("Cumulative", link, sep = " ")

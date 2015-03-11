@@ -1,3 +1,9 @@
+Version 1.5.1 [2015-03-11]
+ * Updated CITATION file.
+ * Updated documentation.
+ * Now the argument repeated in the functions nomLORgee, ordLORgee and intrinsic.pars accepts variables with names that are derivates of the word "repeated" (reported by Arianna Cecchetti).
+ * Added a vignette file.
+
 Version 1.5.0 [2014-11-02]
  * Updated NAMESPACE file.
  * Corrected the NEWS file.
