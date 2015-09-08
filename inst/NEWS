@@ -1,3 +1,7 @@
+Version 1.5.2 [2015-09-08]
+ * Updated maintainer's email address.
+ * The package now imports functions from the R packages stats and utils.
+
 Version 1.5.1 [2015-03-11]
  * Updated CITATION file.
  * Updated documentation.

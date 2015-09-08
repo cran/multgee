@@ -4,4 +4,5 @@ S3method(summary,LORgee)
 S3method(print,summary.LORgee)
 S3method(print,waldts)
 import(gnm,VGAM)
-
+importFrom("utils", "combn")
+importFrom("stats","pnorm","update","poisson","glm","reshape","make.link","model.response","model.extract","pchisq","printCoefmat")

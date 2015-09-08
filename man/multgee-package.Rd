@@ -27,7 +27,7 @@ The function \link{waldts} provides a goodness-of-fit test between two nested GE
 
 \author{
 Anestis Touloumis
-Maintainer: Anestis Touloumis <Anestis.Touloumis@cruk.cam.ac.uk>
+Maintainer: Anestis Touloumis <A.Touloumis@brighton.ac.uk>
 }
 
 \references{

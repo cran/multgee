@@ -7,7 +7,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% almost as usual
-\author{Anestis Touloumis\\ Cancer Research UK Cambridge Institute, University of Cambridge}
+\author{Anestis Touloumis\\ School of Computing, Engeneering and Mathematics, University of Brighton}
 \title{\proglang{R} Package \pkg{multgee}: A Generalized Estimating Equations Solver for Multinomial Responses}
 
 %% for pretty printing and a nice hypersummary also set:
@@ -39,10 +39,10 @@ The \proglang{R} package \pkg{multgee} implements the local odds ratios generali
 %% in the following format:
 \Address{
   Anestis Touloumis\\
-  Cancer Research UK Cambridge Institute\\
-  University of Cambridge\\
-  Li Ka Shing Centre, Robinson Way, Cambridge, CB2 0RE, UK\\
-  E-mail: \email{Anestis.Touloumis@cruk.cam.ac.uk}
+  School of Computing, Engeneering and Mathematics\\
+  University of Brighton\\
+  Moulsecoome, Brighton, BN2 4GJ, UK\\
+  E-mail: \email{A.Touloumis@brighton.cam.ac.uk}
 }
 
 
