@@ -11,7 +11,7 @@ options(prompt = "R> ", continue = "+   ")
 
 
 ###################################################
-### code chunk number 2: multgee.Rnw:209-214
+### code chunk number 2: multgee.Rnw:189-194
 ###################################################
 library("multgee")
 data("arthritis")
@@ -21,7 +21,7 @@ intrinsic.pars(y = y, data = arthritis, id = id, repeated = time,
 
 
 ###################################################
-### code chunk number 3: multgee.Rnw:221-225
+### code chunk number 3: multgee.Rnw:201-205
 ###################################################
  fit <- ordLORgee(formula = y ~ factor(time) + factor(trt) + factor(baseline),
         link = "logit", id = id, repeated = time, data = arthritis,
@@ -30,7 +30,7 @@ intrinsic.pars(y = y, data = arthritis, id = id, repeated = time,
 
 
 ###################################################
-### code chunk number 4: multgee.Rnw:240-242
+### code chunk number 4: multgee.Rnw:220-222
 ###################################################
 fit1 <- update(fit, formula = ~. + factor(sex) + age)
 waldts(fit, fit1)

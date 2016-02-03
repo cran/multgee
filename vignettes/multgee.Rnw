@@ -1,42 +1,22 @@
-\documentclass[nojss]{jss}
+\documentclass[article,shortnames,nojss]{jss}
 \usepackage{amsmath}    
 \usepackage{amsbsy}
 \usepackage{thumbpdf}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% declarations for jss.cls %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% almost as usual
 \author{Anestis Touloumis\\ School of Computing, Engeneering and Mathematics, University of Brighton}
 \title{\proglang{R} Package \pkg{multgee}: A Generalized Estimating Equations Solver for Multinomial Responses}
 
-%% for pretty printing and a nice hypersummary also set:
-\Plainauthor{Anestis Touloumis} %% comma-separated
-\Plaintitle{R Package multgee: A Generalized Estimating Equations Solver for Multinomial Responses} %% without formatting
-\Shorttitle{\pkg{multgee}: GEE for Multinomial Responses} %% a short title (if necessary)
+\Plainauthor{Anestis Touloumis} 
+\Plaintitle{R Package multgee: A Generalized Estimating Equations Solver for Multinomial Responses} 
+\Shorttitle{\pkg{multgee}: GEE for Multinomial Responses} 
 
-
-%% an abstract and keywords
 \Abstract{
 This introduction to the \proglang{R} package \pkg{multgee} is a slightly modified version of \cite{Touloumis2015}, published in the Journal of Statistical Software. To cite \pkg{multgee} in publications, please use \cite{Touloumis2015}. To cite the GEE methodology implemeted in \pkg{multgee}, please use \cite{Touloumis2012}.
 
 The \proglang{R} package \pkg{multgee} implements the local odds ratios generalized estimating equations (GEE) approach proposed by \cite{Touloumis2012}, a GEE approach for correlated multinomial responses that circumvents theoretical and practical limitations of the GEE method. A main strength of \pkg{multgee} is that it provides GEE routines for both ordinal (\code{ordLORgee}) and nominal (\code{nomLORgee}) responses, while relevant softwares in \proglang{R} and \proglang{SAS} are restricted to ordinal responses under a marginal cumulative link model specification. In addition, \pkg{multgee} offers a marginal adjacent categories logit model for ordinal responses and a marginal baseline category logit model for nominal. Further, utility functions are available to ease the local odds ratios structure selection (\code{intrinsic.pars}) and to perform a Wald type goodness-of-fit test between two nested GEE models (\code{waldts}). We demonstrate the application of \pkg{multgee} through a clinical trial with clustered ordinal multinomial responses.
 }
 \Keywords{generalized estimating equations, nominal and ordinal multinomial responses, local odds ratios, \proglang{R}}
-\Plainkeywords{generalized estimating equations, nominal and ordinal multinomial responses, local odds ratios, R} %% without formatting
-%% at least one keyword must be supplied
-
-%% publication information
-%% NOTE: Typically, this can be left commented and will be filled out by the technical editor
-%% \Volume{50}
-%% \Issue{9}
-%% \Month{June}
-%% \Year{2012}
-%% \Submitdate{2012-06-04}
-%% \Acceptdate{2012-06-04}
-
-%% The address of (at least) one author should be given
-%% in the following format:
+\Plainkeywords{generalized estimating equations, nominal and ordinal multinomial responses, local odds ratios, R} 
 \Address{
   Anestis Touloumis\\
   School of Computing, Engeneering and Mathematics\\
@@ -250,6 +230,7 @@ From a practical point of view, we recommend the use of the \code{\textquotedbl{
 In future versions of \pkg{multgee}, we plan to permit time-dependent intercepts in the marginal models, to increase the range of the marginal models, by including, for example, the family of continuation-ratio models for ordinal responses, and to offer a function for assessing the proportional odds assumption in models (\ref{ABMCLM}) and (\ref{ABMACLM}).
 
  
-\bibliography{References}
+\bibliography{./References}
+
 \end{document}
 
