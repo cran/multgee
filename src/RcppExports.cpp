@@ -6,6 +6,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // ipfp_cpp
 arma::mat ipfp_cpp(arma::vec initial_table, arma::colvec row_marginals, arma::rowvec col_marginals, int dimension, int maxiter, double tolerance);
 RcppExport SEXP _multgee_ipfp_cpp(SEXP initial_tableSEXP, SEXP row_marginalsSEXP, SEXP col_marginalsSEXP, SEXP dimensionSEXP, SEXP maxiterSEXP, SEXP toleranceSEXP) {

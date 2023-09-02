@@ -1,11 +1,33 @@
 \name{NEWS}
 \title{NEWS file for the \pkg{multgee} package}
 
+\section{Changes in Version 1.9.0 (2023-09-02)}{
+  \subsection{NEW FEATURES}{
+  \itemize{
+  \item{Added \code{gee_criteria} for variable and association structure selection.}
+  }
+  }
+  \subsection{MAJOR CHANGES}{
+  \itemize{
+  \item{Renamed \code{LORgee.control} function to \code{LORgee_control}.}
+  }
+  }
+  \subsection{MINOR CHANGES}{
+    \itemize{
+    \item{Removed C++11 dependency.}
+    \item{Updated author's contact details in vignette.}
+    \item{Updated CITATION.}
+    \item{Updated GitHub Actions.}
+    \item{Updated \pkg{Roxygen}.}
+    }
+    }
+  }
+
 \section{Changes in Version 1.8.0 (2021-05-13)}{
   \subsection{NEW FEATURES}{
     \itemize{
       \item{Added \code{ipfp_cpp} function.}
-      \item{Added cpp functionality.}
+      \item{Added C++ functionality.}
     }
   }
   \subsection{MINOR CHANGES}{
